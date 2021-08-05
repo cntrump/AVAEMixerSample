@@ -50,7 +50,7 @@
     if (_sequencerPositionSliderUpdateTimer) {
         dispatch_source_set_timer(_sequencerPositionSliderUpdateTimer, DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC, 0);
         dispatch_source_set_event_handler(_sequencerPositionSliderUpdateTimer, ^{
-            _sequencerPositionSlider.value = self.audioEngine.sequencerCurrentPosition;
+            self->_sequencerPositionSlider.value = self.audioEngine.sequencerCurrentPosition;
         });
         dispatch_resume(_sequencerPositionSliderUpdateTimer);
     }

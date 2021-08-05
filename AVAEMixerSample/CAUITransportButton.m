@@ -108,8 +108,8 @@ double toRadians(double degrees) {
 		if (style == recordEnabledButtonStyle) {
 			[UIView animateWithDuration:1 delay:0 options: UIViewAnimationOptionCurveLinear
 							 animations:^{
-					((CAShapeLayer *)self.layer).strokeColor = fillColor;
-					((CAShapeLayer *)self.layer).fillColor = fillColor;
+                ((CAShapeLayer *)self.layer).strokeColor = self->fillColor;
+                ((CAShapeLayer *)self.layer).fillColor = self->fillColor;
 					((CAShapeLayer *)self.layer).lineWidth = .5;
 					[self flash];
 				}		completion:NULL];
@@ -119,7 +119,7 @@ double toRadians(double degrees) {
 			[UIView animateWithDuration:1 delay:0 options: UIViewAnimationOptionCurveLinear
 							 animations:^{
 				((CAShapeLayer *)self.layer).strokeColor = [UIColor clearColor].CGColor;
-				((CAShapeLayer *)self.layer).fillColor = fillColor;
+                ((CAShapeLayer *)self.layer).fillColor = self->fillColor;
 				((CAShapeLayer *)self.layer).lineWidth = 0;
 			}			completion:nil];
 		}
@@ -153,7 +153,7 @@ double toRadians(double degrees) {
     strokeAnim.repeatCount       = 0;
     strokeAnim.autoreverses      = YES;
 	[CATransaction setCompletionBlock: ^{
-		if (drawingStyle == recordEnabledButtonStyle)
+        if (self->drawingStyle == recordEnabledButtonStyle)
 			[self flash];
 	}];
     [((CAShapeLayer *)self.layer) addAnimation:strokeAnim forKey:@"animateStrokeColor"];

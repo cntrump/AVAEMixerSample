@@ -89,12 +89,12 @@
             /* pausing stops the audio engine and the audio hardware, but does not deallocate the resources allocated by prepare().
                When your app does not need to play audio, you should pause or stop the engine (as applicable), to minimize power consumption.
             */
-            if (!_isSessionInterrupted && !_isConfigChangePending) {
-                if (self.playerIsPlaying || self.sequencerIsPlaying || _isRecording) return;
+            if (!self->_isSessionInterrupted && !self->_isConfigChangePending) {
+                if (self.playerIsPlaying || self.sequencerIsPlaying || self->_isRecording) return;
                 
                 NSLog(@"Pausing Engine");
-                [_engine pause];
-                [_engine reset];
+                [self->_engine pause];
+                [self->_engine reset];
                 
                 // post notification
                 if ([self.delegate respondsToSelector:@selector(engineHasBeenPaused)]) {
@@ -110,9 +110,9 @@
             // re-wire all the connections and reset any state that may have been lost due to nodes being
             // uninitialized when the engine was stopped
             
-            _isConfigChangePending = YES;
+            self->_isConfigChangePending = YES;
             
-            if (!_isSessionInterrupted) {
+            if (!self->_isSessionInterrupted) {
                 NSLog(@"Received a %@ notification!", AVAudioEngineConfigurationChangeNotification);
                 NSLog(@"Re-wiring connections");
                 [self makeEngineConnections];
